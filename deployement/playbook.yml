@@ -1,0 +1,19 @@
+---
+- name: deploy whanos
+  hosts: master
+  become: yes
+
+  roles:
+    - base
+    - kube
+    - jenkins
+    - docker
+
+- name: deploy kubelets
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Create host
+      hostname: "{{ kubelet }}"
+      state: present
+      loop: "{{ groups['group_name'] }}"
