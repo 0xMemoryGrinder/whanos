@@ -1,13 +1,21 @@
 ---
-- name: Clone repository
-  git:
-    repo: "{{ repository }}"
-    dest: "{{ deploy_directory }}"
-    version: master
-    force: yes
+- name: Compress repository
+  archive:
+    path: ../
+    dest: repository.tar.gz
 
-- name: Deploy application using Elm
-  command: elm make --output={{ deploy_directory }}/dist/elm.js {{ deploy_directory }}/src/Main.elm
+- name: Copy compressed repository to remote machine
+  copy:
+    src: repository.tar.gz
+    dest: /tmp/
+ 
+- name: Extract compressed repository on remote machine
+  become: yes
+  become_user: root
+  archive:
+    path: /tmp/repository.tar.gz
+    dest: /opt/whanos
+  delegate_to: remote_machine
 
-- name: Start application
-  command: "{{ deploy_directory }}/start_app.sh"
+- name: Deploy application using Helm
+  command: helm install whanos /opt/whanos/kubernetes/whanos/ --values /opt/whanos/kubernetes/whanos/values.yaml
