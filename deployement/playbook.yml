@@ -1,19 +1,17 @@
 ---
-- name: deploy whanos
-  hosts: master
+- name: Deploy Thanos the wale
   become: yes
+  hosts: localhost
+  gather_facts: false
+  vars:
+    repository: "{{ lookup('inventory_hostvars', inventory_hostname)['repository'] }}"
+    deploy_directory: "{{ lookup('inventory_hostvars', inventory_hostname)['deploy_directory'] }}"
 
   roles:
     - base
-    - kube
-    - jenkins
     - docker
+    - jenkins
+    - kube
+    - whanos
 
-- name: deploy kubelets
-  hosts: localhost
-  gather_facts: false
-  tasks:
-    - name: Create host
-      hostname: "{{ kubelet }}"
-      state: present
-      loop: "{{ groups['group_name'] }}"
+

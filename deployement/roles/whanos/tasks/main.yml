@@ -1,0 +1,13 @@
+---
+- name: Clone repository
+  git:
+    repo: "{{ repository }}"
+    dest: "{{ deploy_directory }}"
+    version: master
+    force: yes
+
+- name: Deploy application using Elm
+  command: elm make --output={{ deploy_directory }}/dist/elm.js {{ deploy_directory }}/src/Main.elm
+
+- name: Start application
+  command: "{{ deploy_directory }}/start_app.sh"
