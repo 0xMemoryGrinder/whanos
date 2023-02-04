@@ -1,0 +1,16 @@
+---
+- name: Install Kubernetes
+  apt:
+    name: kubeadm
+    state: present
+
+- name: Install Elm
+  apt:
+    name: elm
+    state: present
+
+- name: Start and enable Kubernetes service
+  service:
+    name: kubelet
+    state: started
+    enabled: yes
