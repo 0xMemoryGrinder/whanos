@@ -1,0 +1,9 @@
+# Default values for whanos.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+jenkins:
+  # the repository to pull the jenkins image created by docker build . (at the root of the repo)
+  image: 
+  # the password has to be encoded in base64
+  adminpassword:

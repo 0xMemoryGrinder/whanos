@@ -1,0 +1,30 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jenkins-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jenkins
+  template:
+    metadata:
+      labels:
+        app: jenkins
+    spec:
+      containers:
+      - name: jenkins-image
+        image: {{ .Values.jenkins.image }}
+        ports:
+        - name: jenkins-ui-port
+          containerPort: 8080
+        envFrom:
+          - secretRef:
+              name: jenkins-secret
+        env:
+          - name: DOCKER_REGISTRY
+            value: {{ .Values.docker.registry }}
+          - name: DOCKER_HOST
+            value: {{ .Values.whanos.docker.host }}
+      restartPolicy: Always
