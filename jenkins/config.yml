@@ -1,0 +1,24 @@
+jenkins:
+  systemMessage: "Whanos GUI"
+  remotingSecurity:
+    enabled: true
+  securityRealm:
+    local:
+      allowsSignup: false
+      users:
+        - id: "admin"
+          name: "Administrator"
+          password: ${ADMIN_PASSWORD}
+  authorizationStrategy:
+    roleBased:
+      roles:
+        global:
+          - name: "admin"
+            description: "Whanos admin"
+            permissions:
+              - "Overall/Administer"
+            assignments:
+              - "admin"
+
+jobs:
+  - file: /jenkins/job_dsl.groovy
