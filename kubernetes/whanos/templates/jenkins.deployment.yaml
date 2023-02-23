@@ -22,9 +22,4 @@ spec:
         envFrom:
           - secretRef:
               name: jenkins-secret
-        env:
-          - name: DOCKER_REGISTRY
-            value: {{ .Values.docker.registry }}
-          - name: DOCKER_HOST
-            value: {{ .Values.whanos.docker.host }}
       restartPolicy: Always
