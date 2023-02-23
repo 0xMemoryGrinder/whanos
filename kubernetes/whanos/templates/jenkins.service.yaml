@@ -10,7 +10,7 @@ spec:
   - name:  http-web-page
     port:  8080
     protocol: TCP
-    targetPort:  web-page
+    targetPort:  jenkins-ui-port
 ---
 apiVersion: v1
 kind: Service
