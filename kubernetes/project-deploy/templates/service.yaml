@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "whanos.fullname" . }}
+  name: {{ include "project-deploy.fullname" . }}
   labels:
-    {{- include "whanos.labels" . | nindent 4 }}
+    {{- include "project-deploy.labels" . | nindent 4 }}
 spec:
   type: {{ .Values.service.type }}
   ports:
@@ -12,4 +12,4 @@ spec:
       protocol: TCP
       name: http
   selector:
-    {{- include "whanos.selectorLabels" . | nindent 4 }}
+    {{- include "project-deploy.selectorLabels" . | nindent 4 }}
