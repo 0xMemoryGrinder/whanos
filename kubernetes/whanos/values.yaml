@@ -7,3 +7,8 @@ jenkins:
   image: jenkins/jenkins
   # the password has to be encoded in base64
   adminpassword:
+
+docker:
+  registry: localhost:32000
+  host: dind-service
+  
