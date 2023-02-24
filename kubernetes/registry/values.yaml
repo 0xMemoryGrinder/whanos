@@ -5,4 +5,5 @@
 registry:
   storage:
     size: 5G
+    path: /var/lib/registry
   port: 5000

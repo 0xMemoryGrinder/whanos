@@ -10,6 +10,8 @@ spec:
     - ReadWriteOnce
   capacity:
     storage: {{ .Values.registry.storage.size }}
+  hostPath:
+    path: {{ .Values.registry.storage.path }}
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
