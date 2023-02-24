@@ -30,22 +30,18 @@
 - name: Add alias to kubectl
   become: false
   lineinfile:
-    path: '/home/.bashrc'
+    path: '~/.bashrc'
     regexp: '^alias kubectl='
     line: 'alias kubectl="microk8s kubectl"'
     state: present
 
-- name: Install Helm
-  ansible.builtin.apt:
-    name: helm
-    state: latest
-    update_cache: true
+- name: Add alias to helm
+  become: false
+  lineinfile:
+    path: '~/.bashrc'
+    regexp: '^alias helm='
+    line: 'alias helm="microk8s helm"'
+    state: present
 
-- name: Add Helm repository
-  command: helm repo add stable https://kubernetes-charts.storage.googleapis.com/
-
-- name: Install Tiller
-  become: yes
-  become_user: root
-  command: helm init --upgrade --service-account tiller
-    
+- name: Sourcing aliases
+  shell: . ~/.bashrc

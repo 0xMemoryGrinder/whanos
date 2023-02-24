@@ -1,8 +1,8 @@
 ---
 - name: Deploy Thanos the wale
   become: yes
-  hosts: master
-  gather_facts: false
+  hosts: localhost
+  gather_facts: yes
 
   roles:
     - base
