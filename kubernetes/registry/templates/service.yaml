@@ -7,4 +7,4 @@ spec:
     app: registry
   ports:
   - port: {{ .Values.registry.port }}
-    targetPort: 5000
+    targetPort: 443
