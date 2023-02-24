@@ -20,7 +20,12 @@ spec:
           volumeMounts:
             - name: storage
               mountPath: /var/lib/registry
+            - name: certs-vol
+              mountPath: "/certs"
       volumes:
         - name: storage
           persistentVolumeClaim:
             claimName: registry-pvclaim
+        - name: certs-vol
+          secret:
+            secretName: certs-secret
