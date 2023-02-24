@@ -1,7 +1,7 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name:  jenkins-service
+  name:  {{ .Release.Name }}-service
 spec:
   selector:
     app:  jenkins
@@ -15,7 +15,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: jenkins-lb
+  name: {{ .Release.Name }}-lb
 spec:
   type: LoadBalancer
   ports:
