@@ -33,4 +33,4 @@ spec:
             claimName: registry-pvclaim
         - name: certs-vol
           secret:
-            secretName: certs-secret
+            secretName: docker-registry-certs
