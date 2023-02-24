@@ -49,7 +49,7 @@ freeStyleJob("link-project") {
 						preBuildCleanup()
 					}
 					steps {
-						shell("/jenkins/piepline.sh \\"$DISPLAY_NAME\\"")
+						shell("/jenkins/pipeline.sh \\"$DISPLAY_NAME\\"")
 					}
 				}
 			''')

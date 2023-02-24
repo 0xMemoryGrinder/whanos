@@ -20,5 +20,9 @@ jenkins:
             assignments:
               - "admin"
 
+security:
+  globalJobDslSecurityConfiguration:
+    useScriptSecurity: false
+
 jobs:
   - file: /jenkins/job_dsl.groovy
