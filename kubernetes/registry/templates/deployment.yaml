@@ -27,8 +27,6 @@ spec:
               value: "/certs/tls.crt"
             - name: REGISTRY_HTTP_TLS_KEY
               value: "/certs/tls.key"
-            - name: REGISTRY_HTTP_ADDR
-              value: "0.0.0.0:443"
       volumes:
         - name: storage
           persistentVolumeClaim:
