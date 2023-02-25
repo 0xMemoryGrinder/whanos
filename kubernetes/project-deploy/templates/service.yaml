@@ -1,15 +1,18 @@
+{{- if .Values.deployment.ports }}
+---
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "project-deploy.fullname" . }}
-  labels:
-    {{- include "project-deploy.labels" . | nindent 4 }}
+  name: {{ .Release.Name }}-lb
 spec:
-  type: {{ .Values.service.type }}
+  type: LoadBalancer
   ports:
-    - port: {{ .Values.service.port }}
-      targetPort: http
+    {{- range .Values.deployment.ports }}
+    - targetPort: {{ . }}
       protocol: TCP
-      name: http
+      port: {{ . }}
+      name: {{ . | quote }}
+    {{- end }}
   selector:
-    {{- include "project-deploy.selectorLabels" . | nindent 4 }}
+    app: {{ .Release.Name }}
+{{- end }}
