@@ -1,52 +1,65 @@
 ---
 - name: Copy images to remote machine
+  become: yes
   copy:
     src: ../../../../images/
     dest: /opt/whanos/images/
 
 - name: Copy kube config to remote machine
+  become: yes
   copy:
     src: ../../../../kubernetes/
     dest: /opt/whanos/kubernetes/
 
 - name: Copy jenkins config to remote machine
+  become: yes
   copy:
     src: ../../../../jenkins/
     dest: /opt/whanos/jenkins/
 
 - name: Copy dockerfile 1 to remote machine
+  become: yes
   copy:
     src: ../../../../Dockerfile
     dest: /opt/whanos/Dockerfile
 
 - name: Copy dockerfile 2 to remote machine
+  become: yes
   copy:
     src: ../../../../dind.Dockerfile
     dest: /opt/whanos/dind.Dockerfile
 
 - name: Build jenkins image
+  become: yes
   shell: cd /opt/whanos && docker build -t localhost:32000/whanos-jenkins . && cd /
 
 - name: Push jenkins image
+  become: yes
   shell: docker push localhost:32000/whanos-jenkins
 
 - name: Giving execute permission to jenkins build pipeline
+  become: yes
   shell: chmod +x /opt/whanos/jenkins/pipeline.sh
 
 - name: Build dind image
+  become: yes
   shell: cd /opt/whanos && docker build -t localhost:32000/whanos-docker -f dind.Dockerfile . && cd /
 
 - name: Push dind image
+  become: yes
   shell: docker push localhost:32000/whanos-docker
 
 - name: Create join key
+  become: yes
   shell: microk8s add-node
   register: join_cluster
 
 - name: Create persistent var
+  become: yes
   set_fact:
     join: "{{ join_cluster.stdout_lines[7] }}"
 
 - name: Deploy application using Helm
+  become: yes
   command: microk8s helm install jenkins /opt/whanos/kubernetes/whanos/ --values /opt/whanos/kubernetes/whanos/values.yaml
 
