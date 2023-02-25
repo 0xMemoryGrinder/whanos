@@ -29,6 +29,7 @@ fi
 
 
 image_name=$REGISTRY/whanos/whanos-$1-${LANGUAGE[0]}
+local_image=localhost:32000/whanos/whanos-$1-${LANGUAGE[0]}
 
 if [[ -f Dockerfile ]]; then # using dockerfile in repository
 	docker build . -t $image_name
@@ -44,7 +45,7 @@ fi
 
 
 if [[ -f whanos.yml ]]; then
-	helm upgrade -if whanos.yml "$1" /kubernetes/project-deploy --set image.image=$image_name --set image.name="$1-name"
+	helm upgrade -if whanos.yml "$1" /kubernetes/project-deploy --set image.image=$local_image --set image.name="$1-name"
 
 	external_ip=""
 	ip_timeout=20
