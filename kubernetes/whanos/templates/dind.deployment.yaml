@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: dind-image
-        image: docker:dind
+        image: {{ .Values.docker.image }}
         ports:
         - containerPort: 2375
         env:
