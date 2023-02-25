@@ -9,6 +9,6 @@ jenkins:
   adminpassword:
 
 docker:
-  registry: registry-service.registry:5000
+  registry: registry-service.container-registry:5000
   host: tcp://dind-service:2375
   

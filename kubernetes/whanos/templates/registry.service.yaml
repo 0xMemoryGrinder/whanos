@@ -2,7 +2,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name:  registry-service
-  namespace:  registry
+  namespace:  container-registry
 spec:
   selector:
     app:  registry
