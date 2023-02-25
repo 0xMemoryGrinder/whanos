@@ -18,8 +18,13 @@
     state: latest
     update_cache: true
 
+- name: Copy docker daemon properties
+  copy:
+    src: ../files/daemon.json
+    dest: /etc/docker/daemon.json
+  
 - name: Start and enable Docker service
   service:
     name: docker
-    state: started
+    state: restarted
     enabled: yes

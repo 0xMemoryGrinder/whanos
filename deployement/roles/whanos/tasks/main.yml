@@ -3,6 +3,21 @@
   copy:
     src: ../../../../
     dest: /opt/whanos
- 
+
+- name: Build jenkins image
+  shell: cd /opt/whanos && docker build -t localhost:32000/whanos-jenkins . && cd /
+
+- name: Push jenkins image
+  shell: docker push localhost:32000/whanos-jenkins
+
+- name: Create join key
+  shell: microk8s add-node
+  register: join_cluster
+
+- name: Create persistent var
+  set_fact:
+    join: "{{ join_cluster.stdout_lines[7] }}"
+
 - name: Deploy application using Helm
-  command: microk8s helm install whanos /opt/whanos/kubernetes/whanos/ --values /opt/whanos/kubernetes/whanos/values.yaml
+  command: microk8s helm install jenkins /opt/whanos/kubernetes/whanos/ --values /opt/whanos/kubernetes/whanos/values.yaml
+

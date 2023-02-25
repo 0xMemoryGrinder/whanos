@@ -23,7 +23,6 @@
     name: root
     state: present
     groups:
-      - docker
       - microk8s
     append: true
 
@@ -45,6 +44,3 @@
 
 - name: Sourcing aliases
   shell: . ~/.bashrc
-
-- name: Enable microk8s registry/dns/metallb
-  shell: export LC_ALL=en_US.utf-8 && export LANG=en_US.utf-8 && microk8s enable registry dns
