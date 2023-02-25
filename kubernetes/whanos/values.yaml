@@ -4,11 +4,12 @@
 
 jenkins:
   # the repository to pull the jenkins image created by docker build . (at the root of the repo)
-  image: jenkins/jenkins
+  image: localhost:32000/whanos-jenkins
   # the password has to be encoded in base64
   adminpassword:
 
 docker:
+  image: localhost:32000/whanos-docker
   registry: registry-service.container-registry:5000
   host: tcp://dind-service:2375
   
