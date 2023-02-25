@@ -5,7 +5,7 @@ SHELL ["/bin/bash", "-c"]
 
 RUN npm i befunge93
 
-RUN curl -L https://gist.githubusercontent.com/0xMemoryGrinder/83f4800c575f3f2506d505c3d7771c58/raw/23acb93fdc02592c4f91ba50ffd83537d32aab00/befunge93Runner.js > /opt/befunge93Runner.js
+COPY befunge93Runner.js /opt/befunge93Runner.js
     
 COPY . /app
 WORKDIR /app
