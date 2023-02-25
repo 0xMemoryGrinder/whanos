@@ -5,7 +5,7 @@
 - If they are different you MUST add them to you ssh agent (refer to ssh documentation)
 - All your machines MUST run **ubuntu** linux distribution !
 - You MUST open the **port 25000** on you master machine !
-- Only use **http** protocol for repositories in Jenkins !
+- Only use **http/https** protocol for repositories in Jenkins !
 
 ## Config Ansible:
 - First go to the deployement folder: 
@@ -81,5 +81,7 @@ ok: [master] => {
 - Click on the green play button on the row 'link-project'
 - Enter your project repository url (http only, no ssh url)
 - Enter you project display name
-- You can now access and run your project from the 'Project' folder on the dashboard
-
+- Press build
+- You can now access your project from the 'Project' folder on the dashboard
+- Jenkins allow you to see the build logs by clicking on the **#BUILD_NB** on the project row
+- Then click on 'Console Logs' on the left side burger menu to see the logs
