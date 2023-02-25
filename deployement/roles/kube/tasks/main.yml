@@ -45,3 +45,9 @@
 
 - name: Sourcing aliases
   shell: . ~/.bashrc
+
+- name: Enable microk8s registry
+  shell: export LC_ALL=en_US.utf-8 && export LANG=en_US.utf-8 && microk8s enable registry
+
+- name: Enable microk8s DNS
+  shell: export LC_ALL=en_US.utf-8 && export LANG=en_US.utf-8 && microk8s enable dns
