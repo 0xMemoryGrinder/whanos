@@ -1,14 +1,43 @@
 ---
-- name: Copy repository to remote machine
+- name: Copy images to remote machine
   copy:
-    src: ../../../../
-    dest: /opt/whanos
+    src: ../../../../images/
+    dest: /opt/whanos/images/
+
+- name: Copy kube config to remote machine
+  copy:
+    src: ../../../../kubernetes/
+    dest: /opt/whanos/kubernetes/
+
+- name: Copy jenkins config to remote machine
+  copy:
+    src: ../../../../jenkins/
+    dest: /opt/whanos/jenkins/
+
+- name: Copy dockerfile 1 to remote machine
+  copy:
+    src: ../../../../Dockerfile
+    dest: /opt/whanos/Dockerfile
+
+- name: Copy dockerfile 2 to remote machine
+  copy:
+    src: ../../../../dind.Dockerfile
+    dest: /opt/whanos/dind.Dockerfile
 
 - name: Build jenkins image
   shell: cd /opt/whanos && docker build -t localhost:32000/whanos-jenkins . && cd /
 
 - name: Push jenkins image
   shell: docker push localhost:32000/whanos-jenkins
+
+- name: Giving execute permission to jenkins build pipeline
+  shell: chmod +x /opt/whanos/jenkins/pipeline.sh
+
+- name: Build dind image
+  shell: cd /opt/whanos && docker build -t localhost:32000/whanos-docker -f dind.Dockerfile . && cd /
+
+- name: Push dind image
+  shell: docker push localhost:32000/whanos-docker
 
 - name: Create join key
   shell: microk8s add-node

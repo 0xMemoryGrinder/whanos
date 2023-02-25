@@ -1,24 +1,24 @@
 ---
-#- name: Deploy Thanos the wale
-#  become: yes
-#  hosts: whanos-master
-#  gather_facts: yes
-#
-#  roles:
-#    - base
-#    - docker
-#    - kube
-#    - whanos
-#
-#- name: Deploy whanos child clusters
-#  become: yes
-#  hosts: whanos-nodes
-#  gather_facts: yes
-#
-#  roles:
-#    - base
-#    - kube-node
-#    - whanos-child
+- name: Deploy Thanos the wale
+  become: yes
+  hosts: whanos-master
+  gather_facts: yes
+
+  roles:
+    - base
+    - docker
+    - kube
+    - whanos
+
+- name: Deploy whanos child clusters
+  become: yes
+  hosts: whanos-nodes
+  gather_facts: yes
+
+  roles:
+    - base
+    - kube-node
+    - whanos-child
 
 - name: Get Master node information
   become: yes
