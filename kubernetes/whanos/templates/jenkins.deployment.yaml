@@ -23,7 +23,7 @@ spec:
           - secretRef:
               name: jenkins-secret
         env:
-          - name: DOCKER_REGISTRY
+          - name: REGISTRY
             value: {{ .Values.docker.registry }}
           - name: DOCKER_HOST
             value: {{ .Values.docker.host }}
