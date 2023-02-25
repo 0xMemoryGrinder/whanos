@@ -20,7 +20,7 @@ spec:
         env:
           - name: DOCKER_TLS_CERTDIR
             value: ""
-          - name REGISTRY
+          - name: REGISTRY
             value: {{ .Values.docker.registry }}
         securityContext:
           privileged: true
