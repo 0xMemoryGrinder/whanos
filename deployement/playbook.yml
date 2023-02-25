@@ -20,4 +20,11 @@
     - kube-node
     - whanos-child
 
+- name: Get Master node information
+  become: yes
+  hosts: whanos-master
+  gather_facts: yes
+
+  roles:
+    - log-info
 

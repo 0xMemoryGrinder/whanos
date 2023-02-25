@@ -1,0 +1,11 @@
+---
+- name: Get Load Balancer Port
+  become: yes
+  command: microk8s kubectl get service jenkins-lb -o jsonpath='{.spec.ports[].nodePort}'
+  register: load_balancer_port
+
+- name: Finished, use next step
+  debug: 
+    msg: "Use your master IP with this port: '{{ load_balancer_port.stdout }}', in your browser to open jenkins interface."
+
+
